@@ -1,0 +1,616 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Simple multi-threaded task processing in python">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>Using pylateral - pylateral</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#4caf50">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="green" data-md-color-accent="green">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#using-return-values" tabindex="0" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="pylateral" aria-label="pylateral" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              pylateral
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Using pylateral
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/boxysean/pylateral/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    boxysean/pylateral
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="pylateral" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    pylateral
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/boxysean/pylateral/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    boxysean/pylateral
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Using pylateral
+      </label>
+    
+    <a href="./" title="Using pylateral" class="md-nav__link md-nav__link--active">
+      Using pylateral
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-return-values" class="md-nav__link">
+    Using return values
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-nested-tasks" class="md-nav__link">
+    Working with nested tasks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waiting-for-tasks" class="md-nav__link">
+    Waiting for tasks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handling-errors" class="md-nav__link">
+    Handling errors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-number-of-threads" class="md-nav__link">
+    Changing the number of threads
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thread-local-storage" class="md-nav__link">
+    Thread-local storage
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../comparison/" title="Comparison With Other Libraries" class="md-nav__link">
+      Comparison With Other Libraries
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-return-values" class="md-nav__link">
+    Using return values
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-nested-tasks" class="md-nav__link">
+    Working with nested tasks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waiting-for-tasks" class="md-nav__link">
+    Waiting for tasks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handling-errors" class="md-nav__link">
+    Handling errors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-number-of-threads" class="md-nav__link">
+    Changing the number of threads
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thread-local-storage" class="md-nav__link">
+    Thread-local storage
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/boxysean/pylateral/edit/master/docs/usage.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Using pylateral</h1>
+                
+                <h3 id="using-return-values">Using return values<a class="headerlink" href="#using-return-values" title="Permanent link">&para;</a></h3>
+<p><em>pylateral</em> tasks should generally avoid returning values; tasks should largely do end-to-end processing and "push forward" results where possible (e.g., store results in a database, call an API). That's because return values from <em>pylateral</em> task methods cannot be used by the main thread directly because they are not available at the method call time as one might expect.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pylateral</span>
+
+<span class="nd">@pylateral.task</span>
+<span class="k">def</span> <span class="nf">favorite_animal</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">&quot;cats&quot;</span>
+
+<span class="k">with</span> <span class="n">pylateral</span><span class="o">.</span><span class="n">task_pool</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">favorite_animal</span><span class="p">())</span>  <span class="c1"># raises UnexpectedReturnValueError()</span>
+</code></pre></div>
+
+
+<p>The return values can be accessed, but only if explicitly specified in the decorator. Since accessing the return values of tasks is not as intuitive as the programmer might initially hope, this design forces programmers to be explicit with what they are asking for.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">pylateral</span>
+
+<span class="nd">@pylateral.task</span><span class="p">(</span><span class="n">has_return_value</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">animal_speak</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">animal</span> <span class="o">==</span> <span class="s2">&quot;cats&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;meow&quot;</span>
+    <span class="k">elif</span> <span class="n">animal</span> <span class="o">==</span> <span class="s2">&quot;dogs&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;woof&quot;</span>
+
+<span class="k">with</span> <span class="n">pylateral</span><span class="o">.</span><span class="n">task_pool</span><span class="p">()</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">animal_speak</span><span class="p">(</span><span class="s2">&quot;cats&quot;</span><span class="p">)</span>
+    <span class="n">animal_speak</span><span class="p">(</span><span class="s2">&quot;dogs&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">pool</span><span class="o">.</span><span class="n">return_values</span><span class="p">())</span>  <span class="c1"># either &#39;[&quot;meow&quot;, &quot;woof&quot;]&#39; or &#39;[&quot;woof&quot;, &quot;meow&quot;]&#39;</span>
+</code></pre></div>
+
+
+<p>Only a list of return values is returned, in no guaranteed order, and without relation to the task method arguments. This feature is intended to be used to collect result details of the task, similar to the reduce step in <a href="https://en.wikipedia.org/wiki/MapReduce">MapReduce</a>.</p>
+<h3 id="working-with-nested-tasks">Working with nested tasks<a class="headerlink" href="#working-with-nested-tasks" title="Permanent link">&para;</a></h3>
+<p><em>pylateral</em> task methods can call other task methods without blocking the task thread execution. This is useful when traversing APIs.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pylateral</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="nd">@pylateral.task</span>
+<span class="k">def</span> <span class="nf">print_post_title</span><span class="p">(</span><span class="n">post_id</span><span class="p">):</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;https://jsonplaceholder.typicode.com/posts/{post_id}&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+
+<span class="nd">@pylateral.task</span>
+<span class="k">def</span> <span class="nf">fetch_posts_by_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This task method calls other task methods.&quot;&quot;&quot;</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;https://jsonplaceholder.typicode.com/posts?userId={user_id}&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
+        <span class="n">fetch_post</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+
+<span class="k">with</span> <span class="n">pylateral</span><span class="o">.</span><span class="n">task_pool</span><span class="p">()</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://jsonplaceholder.typicode.com/users&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+        <span class="n">fetch_posts_by_user</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+</code></pre></div>
+
+
+<h3 id="waiting-for-tasks">Waiting for tasks<a class="headerlink" href="#waiting-for-tasks" title="Permanent link">&para;</a></h3>
+<p>The main thread does not wait for <em>pylateral</em> tasks to complete, but sometimes we may want the main thread to wait. </p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">pylateral</span>
+
+<span class="nd">@pylateral.task</span>
+<span class="k">def</span> <span class="nf">parallel_print</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pylateral</span><span class="o">.</span><span class="n">task_pool</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">parallel_print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># Print the numbers...</span>
+
+    <span class="n">pylateral</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>  <span class="c1"># ...then...</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">parallel_print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">))</span>  <span class="c1"># ...print the letters.</span>
+</code></pre></div>
+
+
+<p>Sometimes it's preferable for the main thread to block when the <em>pylateral</em> thread pool is fully saturated with work. In that case, use the <code>block_when_saturated</code> flag on the <code>task_pool</code>.</p>
+<h3 id="handling-errors">Handling errors<a class="headerlink" href="#handling-errors" title="Permanent link">&para;</a></h3>
+<p>If any exception from a threaded running tasks is uncaught, the <code>task_pool</code> will halt all currently running tasks and the main thread will re-raise the exception as soon as it can.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pylateral</span>
+
+<span class="nd">@pylateral.task</span>
+<span class="k">def</span> <span class="nf">bad_task</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Bad Task!&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pylateral</span><span class="o">.</span><span class="n">task_pool</span><span class="p">():</span>
+    <span class="n">bad_task</span><span class="p">()</span>  <span class="c1"># raises Exception(&quot;Bad Task!&quot;) in the main thread</span>
+</code></pre></div>
+
+
+<p>To avoid one error from halting all <em>pylateral</em> execution, errors must be handled as they are raised.</p>
+<h3 id="changing-the-number-of-threads">Changing the number of threads<a class="headerlink" href="#changing-the-number-of-threads" title="Permanent link">&para;</a></h3>
+<p>You can hard-code the number of threads, you can use an environment variable to change the number of threads, or it will default to using the number </p>
+<p>The number of threads you choose to use depends on how much concurrency you want from <em>pylateral</em>. Usually this is determined by how much compute resources you have (CPU and memory), or how much concurrency any remote connection you make can handle (concurrent DB connections, API connections).</p>
+<p><em>pylateral</em> can be safely disabled with the flip of an environment variable switch: <code>PYLATERAL_ENABLED=false</code>. Your code will run serially and pretend like <em>pylateral</em> calls don't happen.</p>
+<h3 id="thread-local-storage">Thread-local storage<a class="headerlink" href="#thread-local-storage" title="Permanent link">&para;</a></h3>
+<p>It's common to re-use connections in multi-threaded code. Too many allocated connections may exhaust the OS's resources ("too many open files" is a common error here); too few connections may create <a href="https://en.wikipedia.org/wiki/Race_condition#Software">race conditions</a> and present errors related to <a href="https://en.wikipedia.org/wiki/Thread_safety">thread safety</a>.</p>
+<p>A good rule of thumb is one connection per thread. For example, <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/resources.html?highlight=multithreading#multithreading-multiprocessing">boto3 suggests</a> that you have one resource per thread and process. Similarly, <a href="https://github.com/googleapis/google-cloud-python/issues/3272">the developers of google-cloud-python think</a> their library is thread-safe. (But is it?)</p>
+<p><em>pylateral</em> provides a method decorator to create thread-local objects. This approach ensures that each thread re-uses the same client each time it's requested, and no other thread has access to that client.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">pylateral</span>
+
+<span class="k">class</span> <span class="nc">MagicNumberClient</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">magic_number</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_magic_number</span> <span class="o">=</span> <span class="n">magic_number</span>
+
+    <span class="k">def</span> <span class="nf">get_magic_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_magic_number</span>
+
+<span class="nd">@pylateral.cache_result</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">pylateral</span><span class="o">.</span><span class="n">CacheScopes</span><span class="o">.</span><span class="n">THREAD</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_magic_number_client</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">MagicNumberClient</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+
+<span class="nd">@pylateral.task</span>
+<span class="k">def</span> <span class="nf">print_magic_number</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">get_magic_number_client</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">get_magic_number</span><span class="p">())</span>
+
+<span class="k">with</span> <span class="n">pylateral</span><span class="o">.</span><span class="n">task_pool</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">print_magic_number</span><span class="p">()</span>  <span class="c1"># This will print at most 2 different numbers</span>
+</code></pre></div>
+
+
+<p>Another way is to use <a href="https://docs.python.org/3/library/threading.html#thread-local-data"><code>threading.local()</code></a>, which is compatible with <em>pylateral</em>.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../comparison/" title="Comparison With Other Libraries" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Comparison With Other Libraries
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
