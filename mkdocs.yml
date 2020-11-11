@@ -1,0 +1,25 @@
+site_name: pylateral
+site_description: Simple multi-threaded task processing in python
+strict: true
+#site_url: https://pydantic-docs.helpmanual.io/
+
+theme:
+  name: 'material'
+  palette:
+    primary: green
+    accent: green
+
+repo_name: boxysean/pylateral
+repo_url: https://github.com/boxysean/pylateral
+
+nav:
+- Overview: index.md
+- Using pylateral: usage.md
+- Comparison With Other Libraries: comparison.md
+
+markdown_extensions:
+- markdown.extensions.codehilite:
+    guess_lang: false
+- codehilite
+- toc:
+    permalink: true

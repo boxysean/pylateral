@@ -1,0 +1,2 @@
+class PylateralError(Exception):
+    pass
